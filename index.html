@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mapping Virginia’s HD-THC Retailers – Virginia HD-THC Retailer Analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b3f3f5fa5dcc18975450142acfecffd5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#what-the-article-argues" id="toc-what-the-article-argues" class="nav-link" data-scroll-target="#what-the-article-argues">What the article argues</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  </ul></li>
+  <li><a href="#data-methods-results" id="toc-data-methods-results" class="nav-link" data-scroll-target="#data-methods-results">Data, Methods &amp; Results</a></li>
+  <li><a href="#interactive-map" id="toc-interactive-map" class="nav-link" data-scroll-target="#interactive-map">Interactive Map</a>
+  <ul class="collapse">
+  <li><a href="#exploring-the-interactive-map" id="toc-exploring-the-interactive-map" class="nav-link" data-scroll-target="#exploring-the-interactive-map">Exploring the Interactive Map</a></li>
+  <li><a href="#interpreting-the-spatial-model" id="toc-interpreting-the-spatial-model" class="nav-link" data-scroll-target="#interpreting-the-spatial-model">Interpreting the Spatial Model</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#population-and-income-were-the-clearest-demographic-associations" id="toc-population-and-income-were-the-clearest-demographic-associations" class="nav-link" data-scroll-target="#population-and-income-were-the-clearest-demographic-associations">Population and income were the clearest demographic associations</a></li>
+  <li><a href="#health-behavior-findings-were-less-conclusive-than-i-may-have-initially-thought." id="toc-health-behavior-findings-were-less-conclusive-than-i-may-have-initially-thought." class="nav-link" data-scroll-target="#health-behavior-findings-were-less-conclusive-than-i-may-have-initially-thought.">Health-behavior findings were less conclusive than I may have initially thought.</a></li>
+  <li><a href="#commercial-geography-doesnt-necessarily-follow-neighborhood-boundaries" id="toc-commercial-geography-doesnt-necessarily-follow-neighborhood-boundaries" class="nav-link" data-scroll-target="#commercial-geography-doesnt-necessarily-follow-neighborhood-boundaries">Commercial geography doesn’t necessarily follow neighborhood boundaries</a></li>
+  <li><a href="#much-of-the-remaining-variation-was-specific-to-individual-tracts" id="toc-much-of-the-remaining-variation-was-specific-to-individual-tracts" class="nav-link" data-scroll-target="#much-of-the-remaining-variation-was-specific-to-individual-tracts">Much of the remaining variation was specific to individual tracts</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#more-remarks-on-the-spatial-model" id="toc-more-remarks-on-the-spatial-model" class="nav-link" data-scroll-target="#more-remarks-on-the-spatial-model">More Remarks on the Spatial Model</a></li>
+  <li><a href="#what-comes-next-for-virginias-hd-thc-retailers" id="toc-what-comes-next-for-virginias-hd-thc-retailers" class="nav-link" data-scroll-target="#what-comes-next-for-virginias-hd-thc-retailers">What comes next for Virginia’s HD-THC retailers?</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mapping Virginia’s HD-THC Retailers</h1>
+<p class="subtitle lead">A Spatial Analysis of Neighborhood and Commercial Factors</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><em>Shops selling hemp-derived THC (HD-THC) products have become a common sight in Virginia, and I wanted to investigate what kinds of neighborhoods they tend to occupy. Using shop locations across the state, I modeled census-tract counts against health behaviors, income, and business-vacancy measures using a Bayesian spatial Poisson model (BYM2). Higher-income tracts had fewer expected shops (IRR 0.85, 95% CrI 0.76–0.96), while more populous tracts had more (IRR 1.19); business vacancy and low-income share showed no clear associations, and an apparent smoking association weakened after accounting for spatial structure. Most residual variation was unstructured rather than geographically correlated (φ ≈ 0.27), although the analysis could not account for potentially important commercial factors such as rental costs and zoning restrictions.</em></p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the summer of 2025, RVAmag published <a href="https://rvamag.com/news-headlines/the-new-corner-store-how-vape-shops-took-over-richmond.html">The New Corner Store</a>, which associated the proliferation of vape shops in Richmond to a “perfect storm” of legal loopholes, financial timing, and inconsistent regulatory enforcement. I’ve traveled much of Virginia over the past few years, and while I can’t say whether the same mechanisms apply elsewhere, the spread of these shops doesn’t seem unique to Richmond. More recently, I began noticing a pattern of these retailers occupying storefronts in areas where other businesses were closing. Having lived in Appalachia for much of my life, I couldn’t help but associate this pattern with the economic hardship and substance-use problems that have affected so many communities in my home region, particularly during the opioid crisis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/vacant.webp" class="img-fluid figure-img"></p>
+<figcaption>Vape Shop surrounded by vacancies in Staunton, VA in July 2026.</figcaption>
+</figure>
+</div>
+<p>I don’t mean to suggest that stores selling HD-THC are employing strategies comparable to the pharmaceutical marketing practices associated with that crisis. However, the apparent overlap between these retailers and economically distressed commercial areas raised a question I wanted to investigate: <strong><em>are these shops locating in neighborhoods based on the characteristics of the people who live there, or are they primarily following supply-side opportunities, such as inexpensive commercial space, regulatory conditions, and access to product</em></strong>? To explore this, I collected shop locations across Virginia and compared their distribution with census-tract measures of income, health behaviors, population, and commercial vacancy.</p>
+<section id="what-the-article-argues" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-article-argues">What the article argues</h3>
+<p>I highly recommend reading the article in full. For my purposes, what matters most is the set of mechanisms it points to, because they’re the supply-side half of my question and mostly don’t depend on who lives nearby.</p>
+<ul>
+<li><p><strong>A legal gray area.</strong> The 2018 Farm Bill legalized hemp and its derivatives, and the article argues shops used the resulting gray area to sell products without the rules that apply to tobacco. The same gap covers HD-THC, the focus of this project.</p></li>
+<li><p><strong>Cheap, easy space.</strong> According to the article, PPP loans and stimulus money made it easy to take on storefronts in strip malls and shopping plazas, where barriers to entry are low. This is the mechanism my vacancy variable is meant to capture.</p></li>
+<li><p><strong>Thin enforcement and loose supply.</strong> Shop owners quoted in the article say regulators spend their time on detailed inspections of shops trying to comply while gray-market shops go largely ignored. Smokables like vapes and flower also fall largely outside VDACS’s oversight, and wholesalers reportedly move large volumes with little documentation.</p></li>
+<li><p><strong>Loose licensing.</strong> The article reports that Richmond kept issuing business licenses with few restrictions until shortly before it ran. One source estimated about 70 registered hemp locations in the city and perhaps three times as many operating without registration.</p></li>
+</ul>
+<p>Understanding why those gaps exist starts with how Virginia’s cannabis laws evolved—something I studied firsthand as an intern at the Cannabis Control Authority.</p>
+</section>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>In 2024, I interned as a data and research analyst at the Virginia Cannabis Control Authority (CCA), where I had the chance to learn in detail about, what was at the time, a confusing regulatory landscape of cannabis and THC derivatives.</p>
+<p>To give some background, during his last year in office in 2021, Democratic Governor Ralph Northam signed <a href="https://legacylis.virginia.gov/000/chapter551.pdf">Virginia SB 1406 and its companion HB 2312</a>, legalizing adult possession of recereational marijuana and establishing a framework for a retail recreational cannabis market to open starting January 1, 2024. However, significant portions of the retail framework required further legislative action before taking effect. Following Republican Glenn Youngkin’s victory over Democrat Terry McAuliffe in the 2021 gubernatorial election, efforts to establish a functioning recreational market stalled. Youngkin subsequently vetoed retail-market legislation in 2024 and 2025, citing concerns about public health and safety, among other issues.</p>
+<p>One consequence was that the CCA, an agency established partly to administer Virginia’s regulated recreational marijuana market, was unable to fully carry out that responsibility. Meanwhile, businesses selling HD-THC (which I’ll often shorten to HD-THC in my writing) products operated under a separate regulatory framework, with oversight primarily involving the Virginia Department of Agriculture and Consumer Services (VDACS).</p>
+<p>As an intern, I found this latter situation particularly troubling. I could understand, to a certain degree, some of the public-health concerns Youngkin raised about legalizing recreational cannabis sales, especially regarding vulnerable populations. However, allowing an existing market for intoxicating THC products to operate under a different system of oversight, while opposing legislation intended to establish a regulated recreational marijuana market, seemed somewhat at odds with those concerns. Although the CCA’s authority over recreational marijuana would not automatically have extended to every hemp-derived product, the distinction between the two regulatory systems raised questions for me about how Virginia was approaching an already established market for intoxicating products. It was around this time when I first began looking into shops that sell HD-THC products in the state, and the release of the RVA Mag article mentioned earlier helped articulate some of the ideas and questions I was asking myself about their proliferation.</p>
+<p>Additional to my time at the CCA and experience with geospatial analysis via my masters program, interest in the public health and economic aspects of this project came from works by <a href="https://www.jstor.org/stable/j.ctvpr7rb2">Anne Case and Angus Deaton on <em>Deaths of Despair</em></a>, <a href="https://www.nber.org/papers/w21906">David Autor regarding the <em>China Shock</em></a>, and Beth Macy with her books <a href="https://www.hachettebookgroup.com/titles/beth-macy/factory-man/9780316231435/?lens=little-brown"><em>Factory Man</em></a> and <a href="https://www.hachettebookgroup.com/titles/beth-macy/dopesick/9780316551281/?lens=little-brown"><em>Dopesick</em></a>.</p>
+<p>The concept of <em>deaths of despair</em> will likely be familiar to readers affected by or knowledgeable of the opioid crisis. Broadly speaking, it examines connections between diminished economic and social conditions and increases in mortality associated with drug overdoses, alcohol-related disease, and suicide. Related research on the <em>China shock</em> looks into the rapid influx of labor intensive Chinese goods in the 2000s and how that contributed to domestic manufacturing job losses and economonic distruption in certain communities. More recent works like <a href="https://www.aeaweb.org/articles?id=10.1257/aeri.20180396">Pierce and Schott’s paper</a> on the consequences of Permanent Normal Trade Relations (PNTR) with China have also identified associations between greater exposure to trade-related economic disruption and increased drug-overdose mortality.</p>
+<p>Many of these economic challenges directly affected parts of Virginia. In <em>Factory Man</em>, Macy describes the effects of increased foreign competition on the state’s furniture industry, particularly in southern and southwestern Virginia. The contrast between the economic experiences of different regions of the state, and the public-health challenges facing many communities affected by industrial decline, contributed to my interest in how economic conditions might relate to the distribution of HD-THC retailers.</p>
+<hr>
+</section>
+</section>
+<section id="data-methods-results" class="level2">
+<h2 class="anchored" data-anchor-id="data-methods-results">Data, Methods &amp; Results</h2>
+<p>The following <strong>Building the Model</strong> collapsible section will give a brief technical overview on how I went about building the model I ended up using. I will also present many of its results, while leaving a more detailed discussion of them for a later section. For readers who aren’t as concerned about the technical backgrounds of this work, and moreso care about the findings this paper presents, I would recommend skipping ahead to that section.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Building the Model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="getting-shop-counts" class="level3">
+<h3 class="anchored" data-anchor-id="getting-shop-counts">Getting Shop Counts</h3>
+<p>HD-THC shop locations were obtained from the VDACS publicly available registration list from February 2026, Google Maps API, and OpenStreetMap (OSM). After identifying eligible retailers and removing duplicate locations, shops were assigned to Virginia census tracts to calculate tract-level counts. The table below summarizes the contribution of each source. For more information on retailer identification, data collection, and preprocessing, see the appendix.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>VDACS only</td>
+<td>1192</td>
+</tr>
+<tr class="even">
+<td>Google only</td>
+<td>484</td>
+</tr>
+<tr class="odd">
+<td>OSM only</td>
+<td>269</td>
+</tr>
+<tr class="even">
+<td>VDACS &amp; Google</td>
+<td>62</td>
+</tr>
+<tr class="odd">
+<td>VDACS &amp; OSM</td>
+<td>30</td>
+</tr>
+<tr class="even">
+<td>Google &amp; OSM</td>
+<td>60</td>
+</tr>
+<tr class="odd">
+<td>All</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td><strong>TOTAL</strong></td>
+<td><strong>2113</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="neighborhood-data-and-explanatory-variables" class="level3">
+<h3 class="anchored" data-anchor-id="neighborhood-data-and-explanatory-variables">Neighborhood Data and Explanatory Variables</h3>
+<p>To see which neighborhood characteristics were associated with HD-THC shop counts, I combined census-tract measures of health behaviors, household income, population, and commercial activity. Additional information on preprocessing and variable construction is provided in the appendix.</p>
+<p>I excluded tracts with no recorded businesses or missing required CDC PLACES estimates, and selected explanatory variables based on their relevance to the study’s demographic, economic, and public-health questions. To check for multicollinearity, I calculated variance inflation factors (VIF) and retained a specification where all predictors scored below 5. I z-score standardized every variable except <code>log_ams_bus</code> (which serves as the model’s exposure offset, detailed below) in order to make their estimated associations directly comparable.</p>
+<section id="variable-reference-table" class="level4">
+<h4 class="anchored" data-anchor-id="variable-reference-table">Variable Reference Table</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 59%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>What it measures</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BINGE</td>
+<td>Adult binge drinking prevalence (%)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="even">
+<td>CSMOKING</td>
+<td>Adult cigarette smoking prevalence (%)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="odd">
+<td>ACCESS2</td>
+<td>Uninsured adults aged 18–64 (%)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="even">
+<td>SLEEP</td>
+<td>Short sleep duration prevalence (%)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="odd">
+<td>CHECKUP</td>
+<td>Routine medical checkup prevalence (%)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="even">
+<td>log_TotalPop18plus</td>
+<td>Adult population (log-transformed)</td>
+<td>CDC PLACES</td>
+</tr>
+<tr class="odd">
+<td>activ_any</td>
+<td>Any new business-address activations (binary)</td>
+<td>HUD-USPS</td>
+</tr>
+<tr class="even">
+<td>log_bus_vac</td>
+<td>Vacant business addresses (log-transformed)</td>
+<td>HUD-USPS</td>
+</tr>
+<tr class="odd">
+<td>log_ams_bus</td>
+<td>Total business addresses (log-transformed)</td>
+<td>HUD-USPS</td>
+</tr>
+<tr class="even">
+<td>high_inc</td>
+<td>Households earning $150,000+ (%)</td>
+<td>ACS</td>
+</tr>
+<tr class="odd">
+<td>low_inc</td>
+<td>Households earning under $25,000 (%)</td>
+<td>ACS</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cdc-places-health-data" class="level4">
+<h4 class="anchored" data-anchor-id="cdc-places-health-data">CDC PLACES Health Data</h4>
+<p>The CDC’s <a href="https://www.cdc.gov/places/index.html">PLACES: Local Data for Better Health</a> dataset provides model-based estimates of health behaviors, health outcomes, and preventive-care measures for census tracts. Variables from this dataset were included to examine whether neighborhood-level health characteristics were associated with HD-THC retailer locations. Because they are tract-level estimates, they don’t directly measure the behaviors of individual shop customers. In their unstandardized forms, all variables from this dataset, besides <code>log_TotalPop18plus</code> (which is a log-transformed count), represent an estimated percentage of the adult population in each census tract.</p>
+</section>
+<section id="hud-usps-vacancy-data" class="level4">
+<h4 class="anchored" data-anchor-id="hud-usps-vacancy-data">HUD-USPS Vacancy Data</h4>
+<p>The Department of Housing and Urban Development’s <a href="https://www.huduser.gov/portal/datasets/usps.html">Aggregated USPS Administrative Data On Address Vacancies</a> (HUD-USPS) provides census-tract measures of residential and business-address activity, including vacancy and activation counts. I used this data to represent aspects of the commercial environment and potential economic distress.</p>
+<ul>
+<li><code>activ_any</code>: A binary indicator equal to 1 if any business-address activations were recorded in a tract, and 0 otherwise. I used it in place of the original activation count because the distribution was heavily skewed and contained a large proportion of zeros.</li>
+<li><code>log_ams_bus</code>: The log-transformed total business count, which serves as the model’s exposure offset. Including this offset allows expected HD-THC shop counts to be modeled relative to the overall commercial base in each tract.</li>
+</ul>
+</section>
+<section id="acs-income-data" class="level4">
+<h4 class="anchored" data-anchor-id="acs-income-data">ACS Income Data</h4>
+<p><a href="https://www.census.gov/data/developers/data-sets/acs-5year/2024.html">2024 American Community Survey (ACS) five-year estimates</a> provide estimated household counts across 16 annual income brackets in 2024 inflation-adjusted dollars. I converted the top and bottom brackets (high_inc and low_inc) into percentages of total households in each census tract prior to z-score standardizing.</p>
+</section>
+</section>
+<section id="where-are-virginias-hd-thc-shops" class="level3">
+<h3 class="anchored" data-anchor-id="where-are-virginias-hd-thc-shops">Where Are Virginia’s HD-THC Shops?</h3>
+<p>Before examining which neighborhood characteristics were associated with HD-THC retailers, I looked into their geographic distribution across Virginia census tracts. To see see this distribution of shops mapped out, continue to the <a href="#interactive-map">Interactive Map</a> section.</p>
+<p>An initial <a href="https://doc.esri.com/en/arcgis-pro/latest/tool-reference/spatial-statistics/h-how-spatial-autocorrelation-moran-s-i-spatial-st.html">Moran’s I test</a> found evidence of positive spatial autocorrelation in raw shop counts (pseudo-p = 0.001). In other words, neighboring census tracts tended to have more similar shop counts than would be expected under the spatial-randomization null hypothesis (which would have shops locate completely randomly across the state).</p>
+<p>Initial clustering doesn’t necessarily imply that shops are locating near each other because of shared neighborhood characteristics. Differences in population, business activity, and other factors may also produce geographic patterns in shop counts. In order to look at these relationships while accounting for the remaining geographic variation, I turned to spatial count modeling.</p>
+</section>
+<section id="modeling-approach" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-approach">Modeling approach</h3>
+<p>I started with a <a href="https://web.mit.edu/urban_or_book/www/book/chapter3/3.8.html">Poisson model</a>, which represents a standard starting point for modeling counts of relatively uncommon events, like the number of HD-THC shops within a census tract. Since the initial model showed evidence of overdispersion, I also tested a <a href="https://library.virginia.edu/data/articles/getting-started-with-negative-binomial-regression-modeling">Negative Binomial (NB) model</a>, which allows more flexibility in the variance of the observed counts.</p>
+<p>However, the residual Moran’s I tests indicated significant spatial autocorrelation in both non-spatial models, suggesting that neither specification adequately accounted for the geographic structure remaining after controlling for the included explanatory variables.</p>
+<p>To address this, I introduced spatial random effects using the <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdatatheory.html">Besag–York–Mollié 2 (BYM2) model</a>. BYM2 allows the expected number of shops in each tract to vary beyond what is explained by the observed neighborhood characteristics. It separates this additional variation into two components: one that allows neighboring tracts to have similar residual effects, and another that captures variation not explicitly structured by the neighborhood relationships.</p>
+<p>For those interested in the mathematical formulation, prior specifications, and implementation, I’ve included a more detailed explanation in the appendix.</p>
+</section>
+<section id="choosing-the-final-model" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-final-model">Choosing the Final Model</h3>
+<p>Based on information criteria and posterior predictive check (PPC) comparison tables below, I concluded that there was sufficient evidence to <strong>support the Poisson+BYM2 specification over the NB+BYM2 one</strong>, with the caveat that Poisson+BYM2 still has some predictive misfit.</p>
+<p>I compared the non-spatial and spatial specifications using information criteria and posterior predictive checks (PPCs). The information criteria favored Poisson+BYM2, while the PPCs suggested that it generally reproduced the observed distribution of shop counts better than NB+BYM2, though neither model was without some limitations.</p>
+<section id="information-criteria-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="information-criteria-comparison">Information Criteria Comparison</h4>
+<p><em>Lower scores indicate better model fit under each criterion.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Model Specification</th>
+<th>DIC</th>
+<th>WAIC</th>
+<th>Δ WAIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Poisson (Non-spatial)</td>
+<td>5131.3</td>
+<td>5137.8</td>
+<td>+216.4</td>
+</tr>
+<tr class="even">
+<td>Negative Binomial (Non-spatial)</td>
+<td>5023</td>
+<td>5023.4</td>
+<td>+102</td>
+</tr>
+<tr class="odd">
+<td><strong>Poisson + BYM2</strong></td>
+<td><strong>4903.4</strong></td>
+<td><strong>4921.4</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td>Negative Binomial + BYM2</td>
+<td>5023.9</td>
+<td>5024.3</td>
+<td>+102.9</td>
+</tr>
+</tbody>
+</table>
+<p>Poisson+BYM2 had the lowest WAIC, outperforming both non-spatial specifications and NB+BYM2. This suggests that incorporating spatial random effects improved the its fit, while introducing an additional negative binomial dispersion parameter didn’t improve performance under this criterion.</p>
+</section>
+<section id="posterior-predictive-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="posterior-predictive-comparison">Posterior Predictive Comparison</h4>
+<p>These checks provide another way to evaluate model performance through comparing the observed shop-count distribution with datasets simulated from each fitted model.</p>
+<p><em>Values are posterior predictive means with 95% predictive intervals in parentheses.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 10%">
+<col style="width: 33%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Summary Metric</th>
+<th>Observed</th>
+<th>Poisson + BYM2(Mean [95% CI])</th>
+<th>NB + BYM2(Mean [95% CI])</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Total Vape Stores</td>
+<td>2113</td>
+<td>2175 (2039 – 2310)</td>
+<td>2145 (1987 – 2317)</td>
+</tr>
+<tr class="even">
+<td>Sample Variance</td>
+<td>2.21</td>
+<td>2.49 (2.14 – 2.93)</td>
+<td>2.62 (2.10 – 3.33)</td>
+</tr>
+<tr class="odd">
+<td>Zero-Store Areas (0)</td>
+<td>1155</td>
+<td>1117 (1070 – 1166)</td>
+<td>1135 (1075 – 1196)</td>
+</tr>
+<tr class="even">
+<td>High-Density Areas (8+)</td>
+<td>10</td>
+<td>18.1 (11 – 27)</td>
+<td>20.0 (11 – 30)</td>
+</tr>
+<tr class="odd">
+<td>Max Stores in an Area</td>
+<td>13</td>
+<td>15.4 (11 – 24)</td>
+<td>17.5 (12 – 29)</td>
+</tr>
+</tbody>
+</table>
+<p>Poisson+BYM2 produced predictive means closer to the observed variance and maximum shop count, while NB+BYM2 did somewhat better at reproducing the total number of shops and number of tracts with no shops. The observed values for these metrics nevertheless fell within the 95% predictive intervals of both models.</p>
+<p>A notable issue was the number of tracts containing eight or more shops. Only 10 tracts hit this threshold in the observed data, compared with predictive means of approximately 18 for Poisson+BYM2 and 20 for NB+BYM2. The observed count for high-density areas also fell just below the lower bounds of both models’ 95% predictive intervals, which suggests that neither specification entirely captured this feature of the upper tail.</p>
+<p>All together, the information criteria and posterior predictive checks favored Poisson+BYM2 as the main specification. Even though the model generally performed better than NB+BYM2 on the examined measures, it still showed some problems with reproducing the frequency of higher shop counts. Additional diagnostics, including residual spatial autocorrelation tests and more detailed posterior predictive comparisons, are provided in the appendix.</p>
+</section>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<section id="poissonbym2-incedence-rate-ratios-irrs" class="level4">
+<h4 class="anchored" data-anchor-id="poissonbym2-incedence-rate-ratios-irrs">Poisson+BYM2 Incedence Rate Ratios (IRRs)</h4>
+<p>For all of the fixed effects, the table below compares their IRRs from the baseline non-spatial Poisson model, a Poisson+IID model, and the final Poisson+BYM2 model to see how estimated associations adjust when controlling for just unmeasured tract-level overdispersion, and then unmeasured tract-level overdispersion combined with spatial autocorrelation.</p>
+<p><em>For help with variable names, see the previous <a href="#variable-reference-table">reference table</a>.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 22%">
+<col style="width: 7%">
+<col style="width: 20%">
+<col style="width: 7%">
+<col style="width: 21%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Standard Poisson IRR (95% CrI)</th>
+<th>P(IRR&gt;1)</th>
+<th>Poisson + IID IRR (95% CrI)</th>
+<th>P(IRR&gt;1)</th>
+<th>Poisson + BYM2 IRR (95% CrI)</th>
+<th>P(IRR&gt;1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BINGE</td>
+<td>1.079 (0.986–1.180)</td>
+<td>95.0%</td>
+<td>1.095 (0.981–1.221)</td>
+<td>94.8%</td>
+<td>1.097 (0.956–1.256)</td>
+<td>90.8%</td>
+</tr>
+<tr class="even">
+<td>CSMOKING</td>
+<td>1.203 (1.091–1.327)</td>
+<td>100.0%</td>
+<td>1.215 (1.077–1.371)</td>
+<td>99.9%</td>
+<td>1.065 (0.927–1.224)</td>
+<td>81.3%</td>
+</tr>
+<tr class="odd">
+<td>SLEEP</td>
+<td>0.922 (0.863–0.985)</td>
+<td>0.8%</td>
+<td>0.926 (0.854–1.004)</td>
+<td>3.2%</td>
+<td>1.015 (0.917–1.126)</td>
+<td>61.2%</td>
+</tr>
+<tr class="even">
+<td>ACCESS2</td>
+<td>0.948 (0.868–1.036)</td>
+<td>11.9%</td>
+<td>0.948 (0.852–1.056)</td>
+<td>16.5%</td>
+<td>1.048 (0.931–1.181)</td>
+<td>78.1%</td>
+</tr>
+<tr class="odd">
+<td>CHECKUP</td>
+<td>1.090 (0.993–1.196)</td>
+<td>96.5%</td>
+<td>1.092 (0.975–1.223)</td>
+<td>93.6%</td>
+<td>1.106 (0.961–1.272)</td>
+<td>92.1%</td>
+</tr>
+<tr class="even">
+<td>log_bus_vac</td>
+<td>1.021 (0.972–1.072)</td>
+<td>79.3%</td>
+<td>1.009 (0.949–1.073)</td>
+<td>61.1%</td>
+<td>1.019 (0.956–1.085)</td>
+<td>71.6%</td>
+</tr>
+<tr class="odd">
+<td>activ_any</td>
+<td>0.963 (0.926–1.002)</td>
+<td>3.2%</td>
+<td>0.966 (0.919–1.015)</td>
+<td>8.4%</td>
+<td>0.978 (0.931–1.028)</td>
+<td>18.8%</td>
+</tr>
+<tr class="even">
+<td>log_TotalPop18plus</td>
+<td>1.200 (1.142–1.262)</td>
+<td>100.0%</td>
+<td>1.208 (1.138–1.283)</td>
+<td>100.0%</td>
+<td>1.191 (1.121–1.266)</td>
+<td>100.0%</td>
+</tr>
+<tr class="odd">
+<td>high_inc</td>
+<td>0.743 (0.685–0.804)</td>
+<td>0.0%</td>
+<td>0.735 (0.668–0.809)</td>
+<td>0.0%</td>
+<td>0.851 (0.755–0.961)</td>
+<td>0.5%</td>
+</tr>
+<tr class="even">
+<td>low_inc</td>
+<td>0.999 (0.934–1.068)</td>
+<td>48.6%</td>
+<td>0.992 (0.914–1.077)</td>
+<td>42.4%</td>
+<td>0.968 (0.889–1.053)</td>
+<td>22.3%</td>
+</tr>
+<tr class="odd">
+<td>log_ams_bus</td>
+<td>0.727 (0.687–0.769)</td>
+<td>0.0%</td>
+<td>0.752 (0.702–0.807)</td>
+<td>0.0%</td>
+<td>0.744 (0.694–0.798)</td>
+<td>0.0%</td>
+</tr>
+</tbody>
+</table>
+<section id="reading-the-table" class="level5">
+<h5 class="anchored" data-anchor-id="reading-the-table">Reading the table</h5>
+<p>Each IRR is the multiplicative change in the expected shop count, relative to the business base, for a one-SD increase in the predictor (all predictors except <code>log_ams_bus</code> are z-scored, so an IRR of 0.85 corresponds to roughly 15% fewer shops). For log-transformed predictors, I convert to an elasticity, ln(IRR), which gives the percent change in expected shops per 1% change in the predictor. I considered an association clear only when the 95% credible interval excludes 1, and I report P(IRR &gt; 1) as the posterior probability (shown as a percentage) that the association is positive.</p>
+<p>Because z-scoring standardizes these predictors into abstract SD units, the table below provides their unstandardized means and standard deviations so the effects can be mapped back to real-world scales.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Mean</th>
+<th>Std Dev</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BINGE</td>
+<td>14.50</td>
+<td>2.24</td>
+<td>Percentage</td>
+</tr>
+<tr class="even">
+<td>CSMOKING</td>
+<td>12.88</td>
+<td>4.65</td>
+<td>Percentage</td>
+</tr>
+<tr class="odd">
+<td>ACCESS2</td>
+<td>8.87</td>
+<td>3.59</td>
+<td>Percentage</td>
+</tr>
+<tr class="even">
+<td>SLEEP</td>
+<td>36.46</td>
+<td>5.07</td>
+<td>Percentage</td>
+</tr>
+<tr class="odd">
+<td>CHECKUP</td>
+<td>79.11</td>
+<td>2.90</td>
+<td>Percentage</td>
+</tr>
+<tr class="even">
+<td>activ_any</td>
+<td>0.18</td>
+<td>0.38</td>
+<td>Binary</td>
+</tr>
+<tr class="odd">
+<td>log_TotalPop18plus</td>
+<td>7.97</td>
+<td>0.41</td>
+<td>Natural log</td>
+</tr>
+<tr class="even">
+<td>log_bus_vac</td>
+<td>1.24</td>
+<td>1.46</td>
+<td>Natural log</td>
+</tr>
+<tr class="odd">
+<td>low_inc</td>
+<td>12.88</td>
+<td>10.24</td>
+<td>Percentage</td>
+</tr>
+<tr class="even">
+<td>high_inc</td>
+<td>27.93</td>
+<td>20.60</td>
+<td>Percentage</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="clear-associations" class="level4">
+<h4 class="anchored" data-anchor-id="clear-associations">Clear associations</h4>
+<p>Higher-income share (IRR 0.85, 95% CrI 0.76–0.96) went with fewer shops. A 1% larger adult population went with roughly 0.42% more shops per business (95% CrI about 0.28% to 0.57%). Separately, the business base scaled sub-linearly: a 1% larger base went with about 0.70% more shops (about 0.64% to 0.77%).</p>
+</section>
+<section id="no-clear-association" class="level4">
+<h4 class="anchored" data-anchor-id="no-clear-association">No clear association</h4>
+<p>Vacancy, low-income share, and the activation variable had intervals centered near 1 that rule out large effects, and the remaining health variables were not clearly distinguishable from zero.</p>
+</section>
+<section id="what-changed-with-spatial-structure" class="level4">
+<h4 class="anchored" data-anchor-id="what-changed-with-spatial-structure">What changed with spatial structure</h4>
+<p>CSMOKING and SLEEP showed clear associations in the non-spatial models that did not survive BYM2. BINGE and CHECKUP stayed positive (P ≈ 91–92%) but with intervals including 1.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="interactive-map" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-map">Interactive Map</h2>
+<blockquote class="blockquote">
+<p>The map compares observed HD-THC shop locations with the geographic patterns estimated by the spatial model. Areas with elevated spatial multipliers are locations where the model estimates more shops than would otherwise be expected based on the included explanatory variables.</p>
+</blockquote>
+<iframe src="maps/virginia_hdthc_map.html" width="100%" height="650" style="border: none;" loading="lazy">
+</iframe>
+<section id="exploring-the-interactive-map" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-the-interactive-map">Exploring the Interactive Map</h3>
+<p>The map contains two toggleable layers, <strong>Spatial Multiplier</strong> and <strong>HD-THC Shops</strong>, which can be turned on or off using the layer control in the upper-right corner.</p>
+<section id="hd-thc-shops-layer" class="level4">
+<h4 class="anchored" data-anchor-id="hd-thc-shops-layer">HD-THC Shops Layer</h4>
+<p>This layer displays the recorded locations of shops selling hemp-derived THC products across Virginia. It can be toggled independently of the Spatial Multiplier layer, allowing readers to compare the observed distribution of retailers against the geographic patterns estimated by the model.</p>
+</section>
+<section id="spatial-multiplier-layer" class="level4">
+<h4 class="anchored" data-anchor-id="spatial-multiplier-layer">Spatial Multiplier Layer</h4>
+<p>This layer visualizes the estimated spatial effects from the Poisson+BYM2 model across Virginia’s census tracts. The color scheme uses a Fisher-Jenks natural breaks classification, which groups similar values together while highlighting larger differences between groups. This helps reveal geographic patterns and potential outliers that might be less apparent using simpler classification methods.</p>
+<p>Clicking a census tract reveals its standardized explanatory variables (with the exception of log_ams_bus, which remains log-scaled), while hovering over a tract displays the following information:</p>
+<ul>
+<li><strong>geoid</strong>: The census tract’s geographic identification code (FIPS).</li>
+<li><strong>county</strong>: The county or independent city containing the tract.</li>
+<li><strong>count</strong>: The observed number of HD-THC shops within the tract.</li>
+<li><strong>Predicted Shop Count</strong>: The model’s estimated number of HD-THC shops for the tract, accounting for its explanatory variables and spatial effects.</li>
+<li><strong>Prediction Uncertainty (SD)</strong>: The posterior standard deviation of the predicted shop count, providing an indication of uncertainty around the model’s estimate.</li>
+<li><strong>Estimated Spatial Multiplier</strong>: The estimated multiplicative effect of the BYM2 spatial random effect on the expected shop count. A value of 1.0 indicates no adjustment, while 1.5 represents a 50% increase and 0.7 represents a 30% decrease relative to the model’s prediction without that spatial effect.</li>
+<li><strong>Multiplier Uncertainty (SD)</strong>: The posterior standard deviation of the spatial multiplier, indicating uncertainty in the estimated spatial effect.</li>
+<li><strong>Probability of 50%+ Elevated Rate</strong>: Also referred to as the <strong>Exceedance Probability</strong>, this represents the posterior probability that the spatial multiplier exceeds 1.5, corresponding to an increase of more than 50% in the expected shop count relative to the model’s prediction without the spatial effect.</li>
+</ul>
+<p>Since the model includes business addresses as an exposure adjustment, the spatial multiplier represents an adjustment to the expected shop count after accounting for this exposure and the other explanatory variables.</p>
+<section id="identifying-potential-hotspots" class="level5">
+<h5 class="anchored" data-anchor-id="identifying-potential-hotspots">Identifying potential hotspots</h5>
+<p>Census tracts outlined in orange or red have an exceedance probability greater than 0.90, meaning the model assigns more than a 90% probability that their spatial multiplier exceeds 1.5.</p>
+<ul>
+<li><strong>Orange outlines</strong>: Tracts identified by the Poisson+BYM2 model.</li>
+<li><strong>Red outlines</strong>: Tracts identified by both the Poisson+BYM2 and a separate Poisson+IID model.</li>
+</ul>
+<p>The additional Poisson+IID model serves as a robustness check. Some particularly rural or geographically isolated tracts have relatively few neighboring census tracts, which can make their estimated spatial effects more sensitive to the structure of the adjacency graph. Comparing results against a model with independent tract-level random effects helps identify areas whose elevated estimates are not solely dependent on BYM2’s geographically structured smoothing component.</p>
+<p>Red-outlined tracts therefore represent areas where elevated estimates persist across both model specifications, providing additional support for their identification as potential hotspots. The table below identifies these tracts, and gives some of their posterior spatial multiplier estimates from the BYM2 model specification.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>GeoID</th>
+<th>county</th>
+<th>Estimated Spatial Multiplier</th>
+<th>Multiplier Uncertainty (SD)</th>
+<th>Probability of 50%+ Elevated Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>51051040200</td>
+<td>Dickenson County</td>
+<td>4.897</td>
+<td>2.553</td>
+<td>0.987</td>
+</tr>
+<tr class="even">
+<td>51087200126</td>
+<td>Henrico County</td>
+<td>3.648</td>
+<td>1.402</td>
+<td>0.987</td>
+</tr>
+<tr class="odd">
+<td>51121020900</td>
+<td>Montgomery County</td>
+<td>2.794</td>
+<td>1.030</td>
+<td>0.942</td>
+</tr>
+<tr class="even">
+<td>51161031201</td>
+<td>Roanoke County</td>
+<td>3.520</td>
+<td>1.584</td>
+<td>0.964</td>
+</tr>
+<tr class="odd">
+<td>51179010212</td>
+<td>Stafford County</td>
+<td>2.911</td>
+<td>1.274</td>
+<td>0.917</td>
+</tr>
+<tr class="even">
+<td>51185021102</td>
+<td>Tazewell County</td>
+<td>3.245</td>
+<td>1.326</td>
+<td>0.962</td>
+</tr>
+<tr class="odd">
+<td>51760020502</td>
+<td>Richmond city</td>
+<td>3.350</td>
+<td>1.272</td>
+<td>0.978</td>
+</tr>
+<tr class="even">
+<td>51760040201</td>
+<td>Richmond city</td>
+<td>3.274</td>
+<td>1.543</td>
+<td>0.938</td>
+</tr>
+<tr class="odd">
+<td>51760040500</td>
+<td>Richmond city</td>
+<td>3.587</td>
+<td>1.553</td>
+<td>0.972</td>
+</tr>
+<tr class="even">
+<td>51775010100</td>
+<td>Salem city</td>
+<td>2.852</td>
+<td>1.039</td>
+<td>0.951</td>
+</tr>
+<tr class="odd">
+<td>51775010200</td>
+<td>Salem city</td>
+<td>3.039</td>
+<td>1.066</td>
+<td>0.972</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="interpreting-the-spatial-model" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-the-spatial-model">Interpreting the Spatial Model</h3>
+<p>An interesting finding from the spatial model is that much of the remaining geographic variation appears to be specific to individual census tracts rather than shared among neighboring areas.</p>
+<p>The BYM2 model distinguishes between geographically structured variation, which reflects similarities among neighboring census tracts, and unstructured variation, which captures residual differences between individual tracts. Its estimated mixing parameter (φ ≈ 0.21) suggests that the unstructured component contributes more to the overall spatial random effect.</p>
+<p>This distinction is particularly relevant when examining the interactive map. Although some HD-THC retailers cluster within recognizable commercial corridors, neighboring census tracts can have substantially different commercial environments. Differences in zoning, land use, or other unmeasured local characteristics may help explain why the model identifies considerable tract-specific variation.</p>
+<p>A more detailed explanation of the BYM2 model and its estimated hyperparameters is provided in the technical appendix.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p><strong>What does the geographic distribution of HD-THC shops tell us about the relationship between retail opportunity, neighborhood characteristics, and public health—and what can’t this analysis tell us?</strong></p>
+<section id="population-and-income-were-the-clearest-demographic-associations" class="level3">
+<h3 class="anchored" data-anchor-id="population-and-income-were-the-clearest-demographic-associations">Population and income were the clearest demographic associations</h3>
+<p>The positive association with population is perhaps the strongest evidence in the model consistent with a demand-oriented explanation of shop locations. While the business-count exposure term accounts for the broader concentration of businesses, the population coefficient suggests that, given two tracts with similar business counts and other modeled characteristics, the one with more people will generally have a higher expected number of HD-THC shops. Specifically, a one-standard-deviation increase in log-transformed adult population was associated with approximately 19% more expected shops (IRR 1.19, 95% CrI 1.12–1.27).</p>
+<p>This relationship may also help explain some of the elevated spatial multipliers in relatively sparsely populated tracts, particularly in western Virginia. For example, a tract with a relatively small population might serve as a commercial hub for surrounding rural communities and attract customers from well beyond its own borders. This tract could have more shops than the model would otherwise expect based on its population and other characteristics, even if its absolute number of shops remains relatively low. While the model can’t identify where customers originate, this illustrates how the population served by a commercial area may differ from the population living within its census-tract boundaries.</p>
+<p>The inverse association with high-income households was another relatively clear finding. A standard deviation increase in the share of households earning over $150,000 was associated with approximately 15% fewer expected shops (IRR 0.85, 95% CrI 0.76–0.96). This suggests that HD-THC retailers tend to be less prevalent in higher-income tracts, even after accounting for differences in population, business counts, and other modeled characteristics.</p>
+<p>Determining why this relationship exists is slightly difficult. A possible explanation involves differences in consumer preferences or recreational THC use across income groups. For example, a <a href="https://news.gallup.com/poll/642851/cannabis-greatest-among-lower-income-less-educated.aspx">2024 Gallup analysis</a> found that regular cannabis use was more common among respondents from lower-income households than those from higher-income households. However, national cannabis consumption patterns don’t necessarily reflect demand for hemp-derived THC products in Virginia, nor do they establish that customers purchase these products in their own neighborhoods.</p>
+<p>Commercial conditions offer another possible explanation. Differences in zoning, retail development, and commercial rents could affect where these businesses can operate, independently of the preferences of nearby residents. Because the model doesn’t include these factors, it can’t determine whether the negative association with high-income households primarily reflects consumer demand, the commercial environment, or some combination of them.</p>
+</section>
+<section id="health-behavior-findings-were-less-conclusive-than-i-may-have-initially-thought." class="level3">
+<h3 class="anchored" data-anchor-id="health-behavior-findings-were-less-conclusive-than-i-may-have-initially-thought.">Health-behavior findings were less conclusive than I may have initially thought.</h3>
+<p>Compared with population and income, the health-behavior variables gave less conclusive explanations for the distribution of HD-THC retailers. Binge drinking prevalence (<code>BINGE</code>) and routine medical checkup prevalence (<code>CHECKUP</code>) both had suggestive positive posterior associations (though their 95% credible intervals included 1). Cigarette smoking prevalence (<code>CSMOKING</code>), meanwhile, showed a substantially weaker association after accounting for spatial structure. One explanation could be that the non-spatial model attributed some shared geographic variation in smoking prevalence and shop counts to the smoking coefficient, whereas the BYM2 model could account for some of that variation through its random effects. This indicates the importance of considering geographic structure when interpreting relationships between neighborhood health characteristics and retailer locations.</p>
+<p>Another important limitation of the smoking variable is that CDC PLACES measures cigarette smoking prevalence, rather than nicotine vaping or other forms of nicotine consumption. In Virginia, many businesses selling hemp-derived THC products advertise themselves primarily as vape shops rather than conventional tobacco outlets (potentially insert photographs here). Customers of these businesses may vape nicotine or THC products without regularly smoking cigarettes, meaning cigarette-smoking prevalence may not accurately represent the consumer behaviors more relevant to these retailers.</p>
+<p>Data from SAMHSA’s <a href="https://www.samhsa.gov/data/sites/default/files/reports/rpt56287/2024-nsduh-annual-national/2024-nsduh-annual-national-html-071425-edited/2024-nsduh-annual-national.htm#:~:text=1B">2024 National Survey on Drug Use and Health</a> survey provides some support for distinguishing these behaviors. Nicotine vaping, THC vaping, and binge drinking are generally more prevalent among younger adults, while cigarette smoking is comparatively more prevalent in older age groups. These differences suggest that cigarette-smoking prevalence may not be a particularly effective proxy for the populations most likely to use vaping or recreational THC products.</p>
+<p>The suggestive positive association with binge drinking is interesting in this context (IRR 1.10, 95% CrI 0.96–1.26). One possibility is that binge-drinking prevalence reflects broader demographic or behavioral characteristics associated with recreational substance use, including THC consumption. An alternative explanation involves the commercial environments in which these businesses operate. <a href="ttps://www.mdpi.com/2220-9964/14/1/4">Research</a> on marijuana dispensary locations in New York City has identified associations between dispensary locations and certain neighboring land uses, including adult businesses, suggesting that the surrounding commercial environment may influence where cannabis-related retailers locate. It’s possible that nightlife-oriented commercial areas like corridors containing bars, clubs, and late-night restaurants provide similarly favorable environments for HD-THC retailers.</p>
+<p>These explanations aren’t necessarily mutually exclusive. Areas with higher estimated binge-drinking prevalence might also contain demographic characteristics or commercial environments associated with recreational THC consumption. However, CDC PLACES measures the estimated health behaviors of residents, not the characteristics of businesses or the people visiting an area. Consequently, the model can’t establish whether the positive association with binge drinking reflects consumer preferences, the surrounding retail environment, or other unmeasured characteristics.</p>
+<p>Routine medical checkup prevalence (<code>CHECKUP</code>) presented another interesting, although less intuitive, result. Its suggestive positive association with shop counts (IRR 1.11, 95% CrI 0.96–1.27) does not necessarily imply a direct relationship between preventive healthcare utilization and demand for HD-THC products. Instead, <code>CHECKUP</code> may reflect broader characteristics of communities, including differences in healthcare access, socioeconomic conditions, age composition, and patterns of healthcare utilization. Some of these characteristics may overlap with information captured by the model’s income and healthcare-access variables. It’s difficult to determine what underlying characteristics might account for the observed association, though.</p>
+<p>Taken together, these findings provide limited evidence that the health behaviors examined in this study independently explain the distribution of HD-THC retailers. Although <code>BINGE</code> and <code>CHECKUP</code> retained suggestive positive associations, their uncertainty leaves room for a range of effect sizes, while the apparent association with cigarette smoking weakened after spatial adjustment. The results don’t rule out relationships between substance-use behaviors and retail locations, but they suggest that the available health indicators may be insufficient to characterize those relationships.</p>
+</section>
+<section id="commercial-geography-doesnt-necessarily-follow-neighborhood-boundaries" class="level3">
+<h3 class="anchored" data-anchor-id="commercial-geography-doesnt-necessarily-follow-neighborhood-boundaries">Commercial geography doesn’t necessarily follow neighborhood boundaries</h3>
+<p>One of the largest limitations of this analysis is the lack of detailed information on the commercial environments where HD-THC shops operate. While the model accounts for the number of businesses in each tract and includes a measure of commercial vacancy, neither variable necessarily captures the availability, suitability, or cost of retail space. The commercial vacancy variable showed little evidence of association with shop counts (IRR 1.02, 95% CrI 0.96–1.09), but that doesn’t necessarily mean that commercial real estate conditions are unimportant. Differences in zoning, rental costs, road accessibility, and the types of businesses already operating in an area all could influence where retailers choose to locate.</p>
+<p>Another consideration is that census-tract boundaries do not always correspond to commercial geographies. While census tracts provide a useful way to compare neighborhood demographic and health characteristics, commercial activity is often concentrated along particular roads or within relatively small portions of a tract.</p>
+<p>As illustrated by the zoning patterns in Richmond in the image below, a tract may contain a relatively small commercial corridor surrounded primarily by residential land, while adjacent tracts can have substantially different land-use compositions. Consequently, neighboring tracts may have very different opportunities for commercial development despite sharing a boundary.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rva_zoning_combine.jpg" class="img-fluid figure-img"></p>
+<figcaption>Zoning versus tract boundary for census-tracts in the Fan district of RVA</figcaption>
+</figure>
+</div>
+<p>The red line in the zoning map highlights West Broad Street, a major east–west arterial road through Richmond that serves as an important commercial corridor and also forms the boundary of several census tracts. The corresponding view of the interactive map shows several HD-THC retailers located along this stretch of road. This illustrates a potential limitation of using census tracts to examine retail geography: businesses along the same commercial corridor can be assigned to different tracts simply because they fall on opposite sides of a boundary. Although these businesses may occupy similar commercial environments, their shop counts are associated with different tract-level demographic, socioeconomic, and health characteristics.</p>
+<p>This does not necessarily invalidate the associations identified by the model, but it illustrates why census-tract characteristics may provide an incomplete picture of the factors influencing retail location decisions. Without more detailed information on zoning, commercial rents, and road-level retail environments, it is difficult to determine how much of the observed distribution reflects characteristics of nearby residents versus the commercial opportunities available to retailers.</p>
+</section>
+<section id="much-of-the-remaining-variation-was-specific-to-individual-tracts" class="level3">
+<h3 class="anchored" data-anchor-id="much-of-the-remaining-variation-was-specific-to-individual-tracts">Much of the remaining variation was specific to individual tracts</h3>
+<p>Beyond the associations with the included explanatory variables, the BYM2 model also identified differences between census tracts that were not fully accounted for by their observed characteristics. However, these remaining differences were not dominated by a smooth pattern of similarity between neighboring tracts. The model’s estimated mixing parameter (φ ≈ 0.21, 95% CrI 0.07–0.42) suggests that the unstructured component contributed more to the residual geographic variation than the spatially structured component.</p>
+<p>In practical terms, this means that the remaining differences in expected shop counts favored a larger contribution from variation specific to individual tracts and weren’t primarily characterized by neighboring tracts having similar residual effects. This doesn’t mean that geographic location was unimportant, but rather that the remaining variation wasn’t predominantly explained by the particular neighborhood relationships represented by the model’s adjacency structure.</p>
+<p>One possible explanation involves the commercial-geography limitations discussed above. Neighboring tracts can have substantially different zoning compositions, and commercial corridors may follow or cross tract boundaries. These differences could contribute to variation in shop counts that is not well represented by a model relying on shared census-tract boundaries to define spatial relationships. However, the unstructured component also captures other sources of unexplained tract-level variation, and the model can’t determine whether zoning, commercial accessibility, unobserved consumer characteristics, or other factors are responsible for its relatively large contribution.</p>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<p>Besides the missing commercial rent, zoning, and land-use information discussed earlier, there are a few other limitations worth acknowledging.</p>
+<p>The first concerns census tracts as the unit of analysis. The relationships identified in this study describe associations between tract-level characteristics and shop counts, not the behaviors or circumstances of individual residents or customers. For example, an association between cigarette-smoking prevalence and shop counts would not necessarily imply that residents who smoke cigarettes are more likely to purchase products from these retailers. Census-tract averages can also obscure considerable differences within neighborhoods, particularly when commercial and residential zones occupy different parts of the same tract. This makes it difficult to determine how closely the characteristics of nearby residents correspond to those of the people actually visiting HD-THC shops.</p>
+<p>Another deals with the cross-sectional nature of the analysis. Since I only have shop locations from earlier this year, I can’t determine whether retailers followed, preceded, or appeared alongside changes in neighborhood characteristics. Despite it being one of the original observations motivating this project, this means I can’t directly evaluate whether HD-THC shops have proliferated in recent years. I attempted to locate historical retailer information through older VDACS registration lists and archived web records, but ultimately wasn’t able to assemble a reliable time series of shop locations. Without that data, an analysis of how the distribution of these businesses has changed over time is outside the scope of this project.</p>
+<p>The available health-behavior measures present another limitation. CDC PLACES provides modeled estimates of selected health characteristics among residents, rather than direct measures of HD-THC consumption or consumer demand. As mentioned earlier, cigarette-smoking prevalence doesn’t necessarily capture nicotine vaping, THC vaping, or other behaviors that may be more relevant to these retailers (making more detailed information on vaping and THC consumption useful for future research). Similarly, the lack of retailer and customer data makes it impossible to directly examine business-location decisions, customer origins, purchasing patterns, or marketing practices. Because of this, the analysis can’t establish whether retailers deliberately target particular demographics or whether they locate mostly due to other commercial considerations.</p>
+</section>
+<section id="more-remarks-on-the-spatial-model" class="level3">
+<h3 class="anchored" data-anchor-id="more-remarks-on-the-spatial-model">More Remarks on the Spatial Model</h3>
+<p>A slightly more technical limitation concerns how the BYM2 model defines relationships between neighboring census tracts. I used a queen adjacency structure, which considers tracts to be neighbors whenever they share a boundary or even a single point. While this is a common and defensible approach to modeling areal data, it’s also a relatively simple representation of geographic relationships.</p>
+<p>In reality, neighboring tracts may have very different levels of connectivity. Two tracts sharing a long commercial highway might have considerably more interaction than two tracts touching at a single corner. Likewise, geographic features like mountains, rivers, and roads can also influence how easily people travel between neighboring areas. These differences, however, aren’t directly captured by the queen adjacency structure.</p>
+<p>This limitation may be particularly relevant to a study of retail locations, where accessibility and transportation networks could matter as much as geographic proximity. Possible extensions could be to compare the results with alternative neighborhood structures based on road connectivity, travel times, or shared-boundary lengths.</p>
+<p>There are, however, some reasons to be less concerned about the model’s dependence on the adjacency structure. The relatively low BYM2 mixing parameter (φ ≈ 0.21) suggests that the unstructured component contributed more to the remaining geographic variation than the spatially structured component. Additionally, comparisons with an independent tract-level random-effects (IID) model showed that some areas with elevated spatial multipliers were identified under both specifications. While neither result establishes that the choice of adjacency structure had little influence on the estimates, they do suggest that at least some of the remaining tract-level variation wasn’t entirely dependent on the model’s neighborhood relationships.</p>
+<p>Ultimately, testing alternative spatial-weight structures would be a useful next step of this analysis, especially given the differences in transportation networks and commercial geography across Virginia.</p>
+</section>
+<section id="what-comes-next-for-virginias-hd-thc-retailers" class="level3">
+<h3 class="anchored" data-anchor-id="what-comes-next-for-virginias-hd-thc-retailers">What comes next for Virginia’s HD-THC retailers?</h3>
+<p>In <a href="https://cca.virginia.gov/news/virginias-new-marijuana-and-hemp-laws-what-you-need-to-know">August 2026</a>, Virginia eliminated an exemption that previously allowed hemp products containing more than two milligrams of total THC per package, provided they maintained a CBD-to-THC ratio of at least 25:1. The change effectively removed a pathway for selling certain higher-potency hemp products outside the state’s medical cannabis system. Meanwhile, <a href="https://www.wilsonelser.com/publications/the-great-hemp-reset-how-the-federal-ban-on-intoxicating-hemp-products-will-reshape-risk-and-coverage">federal legislation</a> enacted in November 2025 established an even stricter limit of 0.4 milligrams of THC and certain similar cannabinoids per container, with most provisions scheduled to take effect in December 2026. These restrictions arrive ahead of Virginia’s planned recreational cannabis retail market, scheduled to open July 1, 2027. Together, these developments introduce considerable uncertainty for businesses that have relied on selling intoxicating hemp products.</p>
+<p>Research from other states offers some insight into how these changes might affect Virginia’s retailers, although the evidence is mixed. A <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12707458/">2025 study examining tobacco retailers in New York City, San Francisco, and Philadelphia</a> found no statistically significant difference in the availability of THC-labeled products across the three cities, despite their differing recreational cannabis policies. Approximately two-thirds of dedicated smoke and vape shops carried THC products, suggesting that cannabinoid retailing can persist even in markets with licensed recreational dispensaries. However, the study didn’t distinguish hemp-derived THC from other THC products, nor did it examine how individual businesses performed following legalization.</p>
+<p>Other research suggests that the availability of recreational cannabis may influence demand for intoxicating hemp products. A <a href="(https://pmc.ncbi.nlm.nih.gov/articles/PMC12707458/)">2025 study examining Delta-8 THC use across states</a> found that reported use was substantially lower in states permitting recreational marijuana than in states prohibiting marijuana entirely. This pattern is consistent with the possibility that some consumers purchase hemp-derived THC as an alternative when conventional cannabis products are less accessible. As Virginia’s licensed dispensaries begin operating, some of that demand could shift toward the recreational market.</p>
+<p>Regulatory restrictions could have more immediate consequences. A <a href="https://pubmed.ncbi.nlm.nih.gov/39002889/">nationwide study of vape shops</a> conducted in late 2023 found that nine of the ten surveyed Virginia vape shops sold intoxicating cannabis products (ICPs) despite the state’s previous 2 mg per package limit and 25:1 CBD:THC ratio exception. This was consistent with the 90% observed collectively across states categorized as having severe restrictions intended to limit product potency or availability. However, none of the restrictions described in the study were directly comparable to the combination of new state and federal restrictions facing Virginia’s retailers. If these measures function more like outright bans, the considerably lower availability of ICPs observed in states with delta-8 THC bans (43%) may provide a more relevant point of comparison. The introduction of licensed recreational cannabis retail could further influence availability, as only 50% of surveyed vape shops in states with active recreational retail markets sold ICPs, compared with 87% in states without such markets.</p>
+<p>What these changes ultimately mean for Virginia’s existing storefronts is somewhat unclear. Smoke and vape shops usually sell an assortment of products, including nicotine vapes, tobacco, and smoking accessories, and losing the ability to sell higher-potency hemp products wouldn’t necessarily force every retailer to close. Some businesses may adapt their merchandise, while others could struggle to replace that lost source of revenue. Additionally, the availability of recreational cannabis is unlikely to change uniformly across the state, especially as the locations of licensed dispensaries are determined.</p>
+<p>This is where the geography examined in this project becomes particularly interesting. As shown in the <a href="#interactive-map">interactive map</a>, HD-THC retailers aren’t evenly distributed across the state. Some commercial districts contain relatively dense concentrations of shops, while other areas have few nearby retailers. These existing patterns pose questions about how changing regulations might reshape competition. Commercial districts with abundant HD-THC retailers could face considerable pressure if businesses lose access to an important product category or begin competing with licensed dispensaries. Conversely, retailers in areas with limited dispensary access might retain certain advantages in convenience and accessibility, although those advantages would not exempt them from the new restrictions.</p>
+<p>Of course, these remain possibilities rather than predictions established by the analysis. The models developed here describe the geographic distribution of HD-THC retailers during the study period of this year, and not their profitability, dependence on hemp-derived products, or likelihood of remaining in business.</p>
+<p>Regardless, the coming changes provide an interesting opportunity for future research. Comparing the existing retail landscape with updated shop locations after the implementation of federal restrictions and the opening of Virginia’s recreational cannabis market could reveal whether certain commercial environments prove more resilient than others. It could also help determine whether the factors associated with HD-THC shop locations today remain relevant as the market evolves.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/simp1.webp" class="img-fluid figure-img"></p>
+<figcaption>A Simpson’s themed vape shop that sells HD-THC products in Henrico county.</figcaption>
+</figure>
+</div>
+<p>I began this project interested in the rapid emergence of businesses selling hemp-derived THC products across Virginia, and whether their locations might be associated with the socioeconomic and public-health characteristics of surrounding communities. What initially seemed like a relatively straightforward question became more complicated when considering the differences between where people live, where they shop, and the commercial opportunities available to retailers.</p>
+<p>The analysis identified some relatively clear associations between neighborhood characteristics and HD-THC shop counts. Tracts with larger adult populations generally had higher expected shop counts, even after accounting for differences in overall business activity, while tracts with greater concentrations of high-income households tended to have fewer. The health-behavior findings, however, were less conclusive than I initially expected. Although binge drinking and routine medical checkups showed suggestive positive associations, their uncertainty was substantial, and the apparent relationship with cigarette smoking weakened after accounting for spatial variation.</p>
+<p>The spatial analysis also revealed geographic differences that were not fully explained by the included variables. Much of this remaining variation was specific to individual census tracts rather than following a smooth pattern of similarity between neighboring areas. As illustrated by the Richmond zoning example, one possible explanation is that census-tract boundaries do not always reflect the commercial environments where these businesses operate. However, without more detailed information on zoning, commercial rents, and retail accessibility, the analysis cannot establish how much these factors contribute to the observed distribution.</p>
+<p>Virginia’s HD-THC retail market will soon be experiencing some big changes. With new state and federal restrictions on intoxicating hemp products and the anticipated opening of licensed recreational dispensaries, the distribution of retailers documented here might look considerably different in the next few years. Although this analysis can’t predict which businesses will survive or how consumers will respond, it hopefully provides a snapshot of a retail market that developed under a distinct regulatory environment. As that environment changes, the geographic patterns identified in this project offer a starting point for understanding how commercial opportunity, neighborhood characteristics, and cannabis policy may continue to shape where these businesses operate.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,20 @@
+project:
+  type: website
+  render:
+    - index.ipynb
+  resources:
+    - images/
+    - maps/
+
+website:
+  title: "Virginia HD-THC Retailer Analysis"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: right
+
+execute:
+  enabled: false
+  echo: false
