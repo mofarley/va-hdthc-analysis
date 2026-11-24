@@ -10,7 +10,23 @@ format:
 
 ## Summary
 
-*Shops selling hemp-derived THC (HD-THC) products have become a common sight in Virginia, and I wanted to investigate what kinds of neighborhoods they tend to occupy. Using shop locations across the state, I modeled census-tract counts against health behaviors, income, and business-vacancy measures using a Bayesian spatial Poisson model (BYM2). Higher-income tracts had fewer expected shops (IRR 0.85, 95% CrI 0.76–0.96), while more populous tracts had more (IRR 1.19); business vacancy and low-income share showed no clear associations, and an apparent smoking association weakened after accounting for spatial structure. Most residual variation was unstructured rather than geographically correlated (φ ≈ 0.27), although the analysis could not account for potentially important commercial factors such as rental costs and zoning restrictions.*
+*Shops selling hemp-derived THC (HD-THC) products have become a common sight in Virginia, and I wanted to investigate what kinds of neighborhoods they tend to occupy. Using shop locations across the state, I modeled census-tract counts against health behaviors, income, and business-vacancy measures using a Bayesian spatial Poisson model (BYM2). Higher-income tracts had fewer expected shops (IRR 0.85, 95% CrI 0.76–0.96), while more populous tracts had more (IRR 1.19); business vacancy and low-income share showed no clear associations, and an apparent smoking association weakened after accounting for spatial structure. Most residual variation was unstructured rather than geographically correlated (φ ≈ 0.21), although the analysis could not account for potentially important commercial factors such as rental costs and zoning restrictions.*
+
+::: {.callout-note appearance="simple" icon=false}
+## Project at a Glance
+
+- **Scope:** 2,113 identified HD-THC retail locations across Virginia
+- **Tools:** Python, R, INLA, GeoPandas, Folium, Quarto
+- **Data sources:** VDACS, Google Maps API, OpenStreetMap,
+  CDC PLACES, ACS, and HUD-USPS
+- **Methods:** Multi-source data integration, geospatial matching,
+  statistical modeling, Bayesian inference, and model validation
+- **Deliverables:** Statewide retailer dataset, interactive
+  geospatial visualization, and policy-oriented research report
+
+[Explore the Interactive Map](#interactive-map) |
+[View Methods & Results](#data-methods-results)
+:::
 
 ## Introduction
 
@@ -38,24 +54,21 @@ Understanding why those gaps exist starts with how Virginia’s cannabis laws ev
 
 In 2024, I interned as a data and research analyst at the Virginia Cannabis Control Authority (CCA), where I had the chance to learn in detail about, what was at the time, a confusing regulatory landscape of cannabis and THC derivatives.
 
-To give some background, during his last year in office in 2021, Democratic Governor Ralph Northam signed [Virginia SB 1406 and its companion HB 2312](https://legacylis.virginia.gov/000/chapter551.pdf), legalizing adult possession of recereational marijuana and establishing a framework for a retail recreational cannabis market to open starting January 1, 2024. However, significant portions of the retail framework required further legislative action before taking effect. Following Republican Glenn Youngkin's victory over Democrat Terry McAuliffe in the 2021 gubernatorial election, efforts to establish a functioning recreational market stalled. Youngkin subsequently vetoed retail-market legislation in 2024 and 2025, citing concerns about public health and safety, among other issues.
+To give some background, during his last year in office in 2021, Democratic Governor Ralph Northam signed [Virginia SB 1406 and its companion HB 2312](https://legacylis.virginia.gov/000/chapter551.pdf), legalizing adult possession of recreational marijuana and establishing a framework for a retail recreational cannabis market to open starting January 1, 2024. However, significant portions of the retail framework required further legislative action before taking effect. Following Republican Glenn Youngkin's victory over Democrat Terry McAuliffe in the 2021 gubernatorial election, efforts to establish a functioning recreational market stalled. Youngkin subsequently vetoed retail-market legislation in 2024 and 2025, citing concerns about public health and safety, among other issues.
 
 One consequence was that the CCA, an agency established partly to administer Virginia's regulated recreational marijuana market, was unable to fully carry out that responsibility. Meanwhile, businesses selling HD-THC (which I'll often shorten to HD-THC in my writing) products operated under a separate regulatory framework, with oversight primarily involving the Virginia Department of Agriculture and Consumer Services (VDACS).
 
-As an intern, I found this latter situation particularly troubling. I could understand, to a certain degree, some of the public-health concerns Youngkin raised about legalizing recreational cannabis sales, especially regarding vulnerable populations. However, allowing an existing market for intoxicating THC products to operate under a different system of oversight, while opposing legislation intended to establish a regulated recreational marijuana market, seemed somewhat at odds with those concerns. Although the CCA's authority over recreational marijuana would not automatically have extended to every hemp-derived product, the distinction between the two regulatory systems raised questions for me about how Virginia was approaching an already established market for intoxicating products. It was around this time when I first began looking into shops that sell HD-THC products in the state, and the release of the RVA Mag article mentioned earlier helped articulate some of the ideas and questions I was asking myself about their proliferation. 
+As an intern, I became interested in the implications of these distinct regulatory frameworks. While public-health concerns, particularly those involving vulnerable populations, remained central to debates over recreational marijuana sales, an existing market for intoxicating hemp-derived products operated under a separate system of oversight. Although the CCA's authority over recreational marijuana wouldn't automatically have extended to every hemp-derived product, this regulatory distinction raised broader questions for me about the availability, distribution, and oversight of intoxicating THC products in Virginia. It was around this time that I first began looking into shops selling HD-THC products across the state, and the release of the RVA Mag article mentioned earlier helped articulate some of my questions about their proliferation.
 
 Additional to my time at the CCA and experience with geospatial analysis via my masters program, interest in the public health and economic aspects of this project came from works by [Anne Case and Angus Deaton on *Deaths of Despair*](https://www.jstor.org/stable/j.ctvpr7rb2), [David Autor regarding the *China Shock*](https://www.nber.org/papers/w21906), and Beth Macy with her books [*Factory Man*](https://www.hachettebookgroup.com/titles/beth-macy/factory-man/9780316231435/?lens=little-brown) and [*Dopesick*](https://www.hachettebookgroup.com/titles/beth-macy/dopesick/9780316551281/?lens=little-brown). 
 
-The concept of *deaths of despair* will likely be familiar to readers affected by or knowledgeable of the opioid crisis. Broadly speaking, it examines connections between diminished economic and social conditions and increases in mortality associated with drug overdoses, alcohol-related disease, and suicide. Related research on the *China shock* looks into the rapid influx of labor intensive Chinese goods in the 2000s and how that contributed to domestic manufacturing job losses and economonic distruption in certain communities. More recent works like [Pierce and Schott's paper](https://www.aeaweb.org/articles?id=10.1257/aeri.20180396) on the consequences of Permanent Normal Trade Relations (PNTR) with China have also identified associations between greater exposure to trade-related economic disruption and increased drug-overdose mortality. 
+The concept of *deaths of despair* will likely be familiar to readers affected by or knowledgeable of the opioid crisis. Broadly speaking, it examines connections between diminished economic and social conditions and increases in mortality associated with drug overdoses, alcohol-related disease, and suicide. Related research on the *China shock* looks into the rapid influx of labor intensive Chinese goods in the 2000s and how that contributed to domestic manufacturing job losses and economic distruption in certain communities. More recent works like [Pierce and Schott's paper](https://www.aeaweb.org/articles?id=10.1257/aeri.20180396) on the consequences of Permanent Normal Trade Relations (PNTR) with China have also identified associations between greater exposure to trade-related economic disruption and increased drug-overdose mortality. 
 
 Many of these economic challenges directly affected parts of Virginia. In *Factory Man*, Macy describes the effects of increased foreign competition on the state's furniture industry, particularly in southern and southwestern Virginia. The contrast between the economic experiences of different regions of the state, and the public-health challenges facing many communities affected by industrial decline, contributed to my interest in how economic conditions might relate to the distribution of HD-THC retailers.
 
 ---
 ## Data, Methods & Results
-The following **Building the Model** collapsible section will give a brief technical overview on how I went about building the model I ended up using. I will also present many of its results, while leaving a more detailed discussion of them for a later section. For readers who aren't as concerned about the technical backgrounds of this work, and moreso care about the findings this paper presents, I would recommend skipping ahead to that section. 
-
-::: {.callout-note collapse="true"}
-### Building the Model
+The following few sections will give a brief technical overview on how I went about building the model I ended up using. I'll also present many of its results, while leaving a more detailed discussion of them for a later section. For readers who aren't as concerned about the technical backgrounds of this work, and moreso care about the findings this paper presents, I'd recommend skipping ahead to that section. 
 
 ### Getting Shop Counts
 
@@ -71,6 +84,8 @@ HD-THC shop locations were obtained from the VDACS publicly available registrati
 | Google & OSM   | 60       |
 | All            | 16       |
 | **TOTAL**      | **2113** |
+
+Combining VDACS records with external data sources identified an additional 813 potential retailer locations beyond those appearing in the 2026 VDACS registration list. This demonstrates the potential value of multi-source data integration in characterizing retail markets and identifying gaps in administrative data coverage. However, absence from the registration dataset doesn't, by itself, establish regulatory noncompliance.
 
 ### Neighborhood Data and Explanatory Variables
 
@@ -111,7 +126,7 @@ The Department of Housing and Urban Development's [Aggregated USPS Administrativ
 
 ### Where Are Virginia's HD-THC Shops?
 
-Before examining which neighborhood characteristics were associated with HD-THC retailers, I looked into their geographic distribution across Virginia census tracts. To see see this distribution of shops mapped out, continue to the [Interactive Map](#interactive-map) section.
+Before examining which neighborhood characteristics were associated with HD-THC retailers, I looked into their geographic distribution across Virginia census tracts. To see this distribution of shops mapped out, continue to the [Interactive Map](#interactive-map) section.
 
 An initial [Moran's I test](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/spatial-statistics/h-how-spatial-autocorrelation-moran-s-i-spatial-st.html) found evidence of positive spatial autocorrelation in raw shop counts (pseudo-p = 0.001). In other words, neighboring census tracts tended to have more similar shop counts than would be expected under the spatial-randomization null hypothesis (which would have shops locate completely randomly across the state).
 
@@ -144,7 +159,7 @@ I compared the non-spatial and spatial specifications using information criteria
 | **Poisson + BYM2**              | **4903.4** | **4921.4** | **0**  |
 | Negative Binomial + BYM2        | 5023.9     | 5024.3     | +102.9 |
 
-Poisson+BYM2 had the lowest WAIC, outperforming both non-spatial specifications and NB+BYM2. This suggests that incorporating spatial random effects improved the its fit, while introducing an additional negative binomial dispersion parameter didn't improve performance under this criterion.
+Poisson+BYM2 had the lowest WAIC, outperforming both non-spatial specifications and NB+BYM2. This suggests that incorporating spatial random effects improved model fit, while introducing an additional negative binomial dispersion parameter didn't improve performance under this criterion.
 
 #### Posterior Predictive Comparison
 
@@ -168,7 +183,7 @@ All together, the information criteria and posterior predictive checks favored P
 
 ### Results
 
-#### Poisson+BYM2 Incedence Rate Ratios (IRRs)
+#### Poisson+BYM2 Incidence Rate Ratios (IRRs)
 
 For all of the fixed effects, the table below compares their IRRs from the baseline non-spatial Poisson model, a Poisson+IID model, and the final Poisson+BYM2 model to see how estimated associations adjust when controlling for just unmeasured tract-level overdispersion, and then unmeasured tract-level overdispersion combined with spatial autocorrelation.
 
@@ -218,7 +233,6 @@ Vacancy, low-income share, and the activation variable had intervals centered ne
 #### What changed with spatial structure
 
 CSMOKING and SLEEP showed clear associations in the non-spatial models that did not survive BYM2. BINGE and CHECKUP stayed positive (P ≈ 91–92%) but with intervals including 1.
-:::
 
 ## Interactive Map
 
@@ -317,7 +331,7 @@ Commercial conditions offer another possible explanation. Differences in zoning,
 
 Compared with population and income, the health-behavior variables gave less conclusive explanations for the distribution of HD-THC retailers. Binge drinking prevalence (`BINGE`) and routine medical checkup prevalence (`CHECKUP`) both had suggestive positive posterior associations (though their 95% credible intervals included 1). Cigarette smoking prevalence (`CSMOKING`), meanwhile, showed a substantially weaker association after accounting for spatial structure. One explanation could be that the non-spatial model attributed some shared geographic variation in smoking prevalence and shop counts to the smoking coefficient, whereas the BYM2 model could account for some of that variation through its random effects. This indicates the importance of considering geographic structure when interpreting relationships between neighborhood health characteristics and retailer locations.
 
-Another important limitation of the smoking variable is that CDC PLACES measures cigarette smoking prevalence, rather than nicotine vaping or other forms of nicotine consumption. In Virginia, many businesses selling hemp-derived THC products advertise themselves primarily as vape shops rather than conventional tobacco outlets (potentially insert photographs here). Customers of these businesses may vape nicotine or THC products without regularly smoking cigarettes, meaning cigarette-smoking prevalence may not accurately represent the consumer behaviors more relevant to these retailers.
+Another important limitation of the smoking variable is that CDC PLACES measures cigarette smoking prevalence, rather than nicotine vaping or other forms of nicotine consumption. In Virginia, many businesses selling hemp-derived THC products advertise themselves primarily as vape shops rather than conventional tobacco outlets. Customers of these businesses may vape nicotine or THC products without regularly smoking cigarettes, meaning cigarette-smoking prevalence may not accurately represent the consumer behaviors more relevant to these retailers.
 
 Data from SAMHSA's [2024 National Survey on Drug Use and Health](https://www.samhsa.gov/data/sites/default/files/reports/rpt56287/2024-nsduh-annual-national/2024-nsduh-annual-national-html-071425-edited/2024-nsduh-annual-national.htm#:~:text=1B) survey provides some support for distinguishing these behaviors. Nicotine vaping, THC vaping, and binge drinking are generally more prevalent among younger adults, while cigarette smoking is comparatively more prevalent in older age groups. These differences suggest that cigarette-smoking prevalence may not be a particularly effective proxy for the populations most likely to use vaping or recreational THC products.
 
@@ -393,7 +407,7 @@ Regardless, the coming changes provide an interesting opportunity for future res
 
 ## Conclusion
 
-![A Simpsons themed vape shop that selling HD-THC products in Henrico county. Note that is not me standing there, though I would like to get a picture here at some point.](images/simp1.webp)
+![A Simpsons themed vape shop that selling HD-THC products in Henrico county.](images/simp1.webp)
 
 I began this project interested in the rapid emergence of businesses selling hemp-derived THC products across Virginia, and whether their locations might be associated with the socioeconomic and public-health characteristics of surrounding communities. What initially seemed like a relatively straightforward question became more complicated when considering the differences between where people live, where they shop, and the commercial opportunities available to retailers.
 
