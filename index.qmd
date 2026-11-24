@@ -16,7 +16,7 @@ format:
 
 In the summer of 2025, RVAmag published [The New Corner Store](https://rvamag.com/news-headlines/the-new-corner-store-how-vape-shops-took-over-richmond.html), which associated the proliferation of vape shops in Richmond to a "perfect storm" of legal loopholes, financial timing, and inconsistent regulatory enforcement. I've traveled much of Virginia over the past few years, and while I can't say whether the same mechanisms apply elsewhere, the spread of these shops doesn't seem unique to Richmond. More recently, I began noticing a pattern of these retailers occupying storefronts in areas where other businesses were closing. Having lived in Appalachia for much of my life, I couldn't help but associate this pattern with the economic hardship and substance-use problems that have affected so many communities in my home region, particularly during the opioid crisis.
 
-![Vape Shop surrounded by vacancies in Staunton, VA in July 2026.](images/vacant.webp)
+![This vape shop in Staunton is an example of the vacancy pattern I occasionally noticed that helped get me interested in this project.](images/vacant.webp)
 
 I don't mean to suggest that stores selling HD-THC are employing strategies comparable to the pharmaceutical marketing practices associated with that crisis. However, the apparent overlap between these retailers and economically distressed commercial areas raised a question I wanted to investigate: ***are these shops locating in neighborhoods based on the characteristics of the people who live there, or are they primarily following supply-side opportunities, such as inexpensive commercial space, regulatory conditions, and access to product***? To explore this, I collected shop locations across Virginia and compared their distribution with census-tract measures of income, health behaviors, population, and commercial vacancy.
 
@@ -393,7 +393,7 @@ Regardless, the coming changes provide an interesting opportunity for future res
 
 ## Conclusion
 
-![A Simpson's themed vape shop that sells HD-THC products in Henrico county.](images/simp1.webp)
+![A Simpsons themed vape shop that selling HD-THC products in Henrico county. Note that is not me standing there, though I would like to get a picture here at some point.](images/simp1.webp)
 
 I began this project interested in the rapid emergence of businesses selling hemp-derived THC products across Virginia, and whether their locations might be associated with the socioeconomic and public-health characteristics of surrounding communities. What initially seemed like a relatively straightforward question became more complicated when considering the differences between where people live, where they shop, and the commercial opportunities available to retailers.
 
