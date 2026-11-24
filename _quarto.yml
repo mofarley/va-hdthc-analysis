@@ -1,7 +1,7 @@
 project:
   type: website
   render:
-    - index.ipynb
+    - index.qmd
   resources:
     - images/
     - maps/

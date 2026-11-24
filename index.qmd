@@ -268,6 +268,9 @@ The additional Poisson+IID model serves as a robustness check. Some particularly
 
 Red-outlined tracts therefore represent areas where elevated estimates persist across both model specifications, providing additional support for their identification as potential hotspots. The table below identifies these tracts, and gives some of their posterior spatial multiplier estimates from the BYM2 model specification.
 
+<details>
+<summary>Click here to view elevated tracts table</summary>
+
 | GeoID       | county            | Estimated Spatial Multiplier | Multiplier Uncertainty (SD) | Probability of 50%+ Elevated Rate |
 |-------------|-------------------|------------------------------|-----------------------------|-----------------------------------|
 | 51051040200 |  Dickenson County |                        4.897 |                       2.553 |                             0.987 |
@@ -281,6 +284,8 @@ Red-outlined tracts therefore represent areas where elevated estimates persist a
 | 51760040500 |     Richmond city |                        3.587 |                       1.553 |                             0.972 |
 | 51775010100 |        Salem city |                        2.852 |                       1.039 |                             0.951 |
 | 51775010200 |        Salem city |                        3.039 |                       1.066 |                             0.972 |
+
+</details>
 
 ### Interpreting the Spatial Model
 
