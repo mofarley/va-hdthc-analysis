@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/vacant.webp" class="img-fluid figure-img"></p>
-<figcaption>Vape Shop in Statler Square in Staunton, VA in July 2026</figcaption>
+<figcaption>Vape Shop surrounded by vacancies in Staunton, VA in July 2026.</figcaption>
 </figure>
 </div>
 <p>I don’t mean to suggest that stores selling HD-THC are employing strategies comparable to the pharmaceutical marketing practices associated with that crisis. However, the apparent overlap between these retailers and economically distressed commercial areas raised a question I wanted to investigate: <strong><em>are these shops locating in neighborhoods based on the characteristics of the people who live there, or are they primarily following supply-side opportunities, such as inexpensive commercial space, regulatory conditions, and access to product</em></strong>? To explore this, I collected shop locations across Virginia and compared their distribution with census-tract measures of income, health behaviors, population, and commercial vacancy.</p>
@@ -708,6 +708,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>The additional Poisson+IID model serves as a robustness check. Some particularly rural or geographically isolated tracts have relatively few neighboring census tracts, which can make their estimated spatial effects more sensitive to the structure of the adjacency graph. Comparing results against a model with independent tract-level random effects helps identify areas whose elevated estimates are not solely dependent on BYM2’s geographically structured smoothing component.</p>
 <p>Red-outlined tracts therefore represent areas where elevated estimates persist across both model specifications, providing additional support for their identification as potential hotspots. The table below identifies these tracts, and gives some of their posterior spatial multiplier estimates from the BYM2 model specification.</p>
+<details>
+<summary>
+Click here to view elevated tracts table
+</summary>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
@@ -805,6 +809,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+</details>
 </section>
 </section>
 </section>
@@ -974,7 +979,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/mofarley\.github\.io\/va-hdthc-analysis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
